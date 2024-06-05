@@ -1,0 +1,34 @@
+ХМ Авторизация
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE Auth
+
+@Логин nvarchar(50),
+@Пароль nvarchar(50),
+@Результат nvarchar(50) output
+AS
+BEGIN
+
+    
+	SET NOCOUNT ON;
+	DECLARE @Count int;
+	SELECT @Count = COUNT(Логин) FROM Пользователи WHERE Логин = @Логин AND Пароль = @Пароль
+
+	IF @Count = 1
+	BEGIN 
+	SET @Результат = 'Успешно!'
+	END
+	ELSE
+	BEGIN 
+	SET @Результат = 'Ошибка!'
+
+	END
+	
+
+END
+GO
